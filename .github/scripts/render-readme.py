@@ -1,14 +1,15 @@
 """Render the profile README's activity sections from small GitHub queries.
 
-README.gtpl holds four comment markers, each replaced literally in one pass, so
+README.gtpl holds comment markers, each replaced literally in one pass, so
 repository descriptions and pull-request titles are never executed as template
-code. Adapted from ChrisTitusTech/ChrisTitusTech with four changes: a repository
-already listed under "Currently working on" is not repeated under "Latest
-projects", an empty description leaves no dangling dash, Markdown metacharacters
-in GitHub-supplied text are escaped, and the per-section count is one constant.
+code. Adapted from ChrisTitusTech/ChrisTitusTech, with additions: a curated
+project list (featured.json) with live star counts, a one-line "Now", no repeats
+between "Currently working on" and "Latest projects", no dangling dash after an
+empty description, and Markdown metacharacters in GitHub-supplied text escaped.
 """
 
 import json
+import math
 import os
 from pathlib import Path
 import re
@@ -18,7 +19,9 @@ import time
 from urllib.parse import urlencode
 
 
-PER_SECTION = 5
+PER_SECTION = 3
+STARS_SHOWN_FROM = 10
+FEATURED = Path(__file__).resolve().parents[2] / "featured.json"
 
 QUERY = """
 query($login: String!) {
@@ -33,7 +36,7 @@ query($login: String!) {
 }
 """
 
-MARKER = re.compile(r"\{\{ /\* (RECENT_[A-Z_]+) \*/ \}\}")
+MARKER = re.compile(r"\{\{ /\* ([A-Z_]+) \*/ \}\}")
 
 # Blocks another workflow owns (waka.yml writes the WakaTime stats); a re-render
 # keeps whatever is between these markers in the current README.
@@ -67,6 +70,52 @@ def clean(value):
 def repo_line(name, url, description):
     description = clean(description)
     return f"- [{name}]({url})" + (f" — {description}" if description else "")
+
+
+def stars_label(count):
+    """'' below the threshold (0 stars is worse than saying nothing), else '999 stars' or '1.2k+ stars'."""
+    if count < STARS_SHOWN_FROM:
+        return ""
+    if count < 1000:
+        return f"{count} stars"
+    thousands = math.floor(count / 100) / 10
+    return f"{thousands:g}k+ stars"
+
+
+def featured_lines(featured, repos):
+    lines = []
+    for item in featured:
+        repo = repos.get(item["repo"])
+        if not repo or repo["isPrivate"] or repo["isFork"]:
+            print(f"Skipping featured {item['repo']}: missing, private or a fork", file=sys.stderr)
+            continue
+        name = item["repo"].split("/", 1)[1]
+        stars = stars_label(repo["stargazerCount"])
+        lines.append(f"- **[{name}]({repo['url']})** — {item['blurb']}"
+                     + (f" ({stars})" if stars else ""))
+    return lines
+
+
+def featured_query(featured):
+    parts = []
+    for i, item in enumerate(featured):
+        owner, name = item["repo"].split("/", 1)
+        parts.append(f'r{i}: repository(owner: {json.dumps(owner)}, name: {json.dumps(name)}) '
+                     "{ nameWithOwner url stargazerCount isPrivate isFork }")
+    return "query {\n  " + "\n  ".join(parts) + "\n}"
+
+
+def now_line(pull, repo):
+    """The newer of the latest public pull request and the latest new repository."""
+    if pull and (not repo or pull["created_at"] >= repo["created_at"]):
+        name = pull["repository_url"].split("/repos/", 1)[1]
+        return (f'**Now:** [{clean(pull["title"])}]({pull["html_url"]}) '
+                f"in [{name}](https://github.com/{name})")
+    if repo:
+        description = clean(repo["description"])
+        return (f'**Now:** started [{repo["full_name"]}]({repo["html_url"]})'
+                + (f" — {description}" if description else ""))
+    return "**Now:** nothing public this week."
 
 
 def is_self(name, login):
@@ -117,11 +166,16 @@ def keep_sections(rendered, previous):
 
 
 def sections(login):
+    featured = json.loads(FEATURED.read_text())
+    stars = api(["graphql", "-f", f"query={featured_query(featured)}"])["data"]
+    result = {"FEATURED": featured_lines(
+        featured, {r["nameWithOwner"]: r for r in stars.values() if r})}
+
     data = api(["graphql", "-f", f"query={QUERY}", "-f", f"login={login}"])
     entries = data["data"]["user"]["contributionsCollection"]["commitContributionsByRepository"]
     working = recent_contributions(entries, login)
-    result = {"RECENT_CONTRIBUTIONS": [repo_line(r["nameWithOwner"], r["url"], r["description"])
-                                       for r in working]}
+    result["RECENT_CONTRIBUTIONS"] = [repo_line(r["nameWithOwner"], r["url"], r["description"])
+                                       for r in working]
 
     shown = [r["nameWithOwner"] for r in working]
     repos, page = [], 1
@@ -140,6 +194,10 @@ def sections(login):
     if pulls.get("incomplete_results"):
         raise RuntimeError("GitHub returned incomplete pull-request results")
     result["RECENT_PULL_REQUESTS"] = [pr_line(pr) for pr in pulls["items"]]
+
+    newest = next((r for r in repos if not r["fork"] and not r["private"]
+                   and not is_self(r["full_name"], login)), None)
+    result["NOW"] = [now_line(pulls["items"][0] if pulls["items"] else None, newest)]
 
     stars = api([f"users/{login}/starred?sort=created&direction=desc&per_page={PER_SECTION}"])
     result["RECENT_STARS"] = [repo_line(r["full_name"], r["html_url"], r["description"])

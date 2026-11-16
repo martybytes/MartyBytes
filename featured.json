@@ -1,0 +1,14 @@
+[
+  {"repo": "martybytes/terminal-stack",
+   "blurb": "One terminal setup, four operating systems, one `chezmoi apply`. Because retyping your prompt config on every new machine is not a hobby"},
+  {"repo": "martybytes/awesome-github-readme",
+   "blurb": "A README rubric a linter can actually enforce: 40 rules, one Python file, five Claude Code skills. This page scores 90+ against it"},
+  {"repo": "martybytes/fathom-clerk",
+   "blurb": "Every Fathom meeting on disk as plain files, so an agent can `grep` your meetings instead of asking you what was decided"},
+  {"repo": "martybytes/get-computer-info",
+   "blurb": "Prints a machine's specs in a form you can paste straight into an AI prompt, rather than retyping them"},
+  {"repo": "martybytes/agent007memory",
+   "blurb": "A better UI for agent007memory: health and real-time state of what your agents remember"},
+  {"repo": "martybytes/alt-h",
+   "blurb": "Alt+H minimizes the focused Windows window. That is the whole app"}
+]

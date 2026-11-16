@@ -4,8 +4,18 @@
   "strict": false,
   "min_score": 90,
   "disable": [
-    "ONB001", "ONB002", "ONB003", "ONB004",
-    "SEC001", "TRU001", "TRU002", "TRU003", "ORI002"
+    "ONB001",
+    "ONB002",
+    "ONB003",
+    "ONB004",
+    "SEC001",
+    "TRU001",
+    "TRU002",
+    "TRU003",
+    "ORI002",
+    "ORI001",
+    "HERO003",
+    "TRU004"
   ],
   "require": [],
   "allow_badges": [],

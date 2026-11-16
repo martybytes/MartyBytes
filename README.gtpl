@@ -1,73 +1,58 @@
-<h1 align="center">Marty Sampson</h1>
-
-<p align="center">
-  <em>Building software with AI agents, writing down what works, and running 37Metrics and Dimension42.</em>
-</p>
-
 <p align="center">
   <picture>
     <source media="(prefers-color-scheme: dark)" srcset="assets/banner-dark.svg">
     <source media="(prefers-color-scheme: light)" srcset="assets/banner-light.svg">
-    <img alt="The Marty M beside the wordmark MARTY SAMPSON and the line MARTYBYTES, building software with agents" src="assets/banner-light.svg" width="900">
+    <img alt="The Marty M beside the wordmark MARTY SAMPSON and the line MARTYBYTES, building software with agents" src="assets/banner-light.svg" width="720">
   </picture>
 </p>
 
-<p align="center">
-  <a href="https://github.com/martybytes/MartyBytes/actions/workflows/readme.yml"><img alt="README refresh status" src="https://img.shields.io/github/actions/workflow/status/martybytes/MartyBytes/readme.yml?branch=main&style=flat-square&label=readme"></a>
-  <a href="https://github.com/martybytes/MartyBytes/actions/workflows/metrics.yml"><img alt="Metrics refresh status" src="https://img.shields.io/github/actions/workflow/status/martybytes/MartyBytes/metrics.yml?branch=main&style=flat-square&label=metrics"></a>
-  <a href="https://github.com/martybytes/MartyBytes/commits/main"><img alt="Last commit" src="https://img.shields.io/github/last-commit/martybytes/MartyBytes?style=flat-square"></a>
-</p>
+# Marty Sampson
 
-<p align="center">
-  <a href="#sites">Sites</a> &middot;
-  <a href="#featured-projects">Projects</a> &middot;
-  <a href="#activity">Activity</a> &middot;
-  <a href="#contact">Contact</a>
-</p>
+I build software with AI agents and write down what actually works.
+
+Twenty years of shipping before agents made it fashionable. I was CIO at Jimmy
+John's while it grew from 376 restaurants to over 1,000, and launched online
+ordering that did a million dollars a day within a month of going live. As VP of Operations at
+Blue Ocean Consulting my team delivered 300+ client projects. Then I founded
+[37Metrics](https://37metrics.com) and spent years as a contract CTO. Physics
+degree, which explains the habit of measuring things.
+
+[martybytes.com](https://martybytes.com) · [martysampson.ai](https://martysampson.ai) · [YouTube](https://www.youtube.com/@MartyBytes) · [X](https://x.com/martybytes) · [LinkedIn](https://www.linkedin.com/in/martysampson/) · [CV](https://martysampson.com/cv/)
+
+{{ /* NOW */ }}
 
 ---
 
-## About
+## Companies
 
-I build software with AI agents across the whole delivery lifecycle — planning,
-code, review, release — and publish the field notes as I go. Most of what is
-public here is tooling that came out of that work: one terminal setup across four
-operating systems, a README standard a linter can enforce, and a meeting archive
-an agent can grep.
+- **[37Metrics](https://37metrics.com)** — The holding company I founded. Software, consulting and the occasional CTO-for-hire
+- **[Dimension42](https://dimension42.ai)** — Technology advisory and implementation for people who sign the checks, not the pull requests
 
-## Sites
+## Writing
 
-| Site | What you will find there |
-|---|---|
-| [martybytes.com](https://martybytes.com) | Practical field notes for building software with agents across the delivery lifecycle |
-| [martysampson.ai](https://martysampson.ai) | Source-backed explainers about AI systems, memory, context and evaluation |
-| [martysampson.com](https://martysampson.com) | My personal site: physics, technology, interests and professional lessons |
-| [37metrics.com](https://37metrics.com) | 37Metrics, the independent technology holding company I founded |
-| [dimension42.ai](https://dimension42.ai) | Dimension42, technology advisory and implementation for business decision-makers |
+- **[MartyBytes](https://martybytes.com)** — Field notes on building software with agents, from planning to release
+- **[martysampson.ai](https://martysampson.ai)** — Source-backed explainers on AI memory, context and evaluation. Citations, not vibes
+- **[martysampson.com](https://martysampson.com)** — The personal site: physics, technology and lessons I paid for
 
-## Featured projects
+## Tools I built
 
-| Project | What it does |
-|---|---|
-| [terminal-stack](https://github.com/martybytes/terminal-stack) | One terminal setup — WezTerm, tmux, Starship, zsh and PowerShell — deployed to Windows, WSL, Linux and macOS from a single chezmoi repo, so every machine gets the same prompt, keys and fonts |
-| [awesome-github-readme](https://github.com/martybytes/awesome-github-readme) | A 40-rule README rubric with a one-file linter, five Claude Code skills and advisory hooks; this page is checked against it |
-| [fathom-clerk](https://github.com/martybytes/fathom-clerk) | Syncs every Fathom meeting to disk — transcript, summary, action items, raw JSON — in predictable folders, so an agent or `grep` can read your meetings without the API |
-| [get-computer-info](https://github.com/martybytes/get-computer-info) | Gathers system information on Linux, macOS and Windows and prints it in a form ready to hand an AI as context, rather than retyping specs into a prompt |
-| [resurrect.wezterm](https://github.com/martybytes/resurrect.wezterm) | Saves and restores WezTerm windows, tabs and panes, in the spirit of tmux-resurrect |
-| [alt-h](https://github.com/martybytes/alt-h) | A Windows tray utility that binds Alt+H to minimise the focused window |
+{{ /* FEATURED */ }}
 
-## Activity
-
-<p align="left"><img alt="GitHub metrics for martybytes: contribution calendar, activity and repositories" src="https://raw.githubusercontent.com/martybytes/MartyBytes/main/github-metrics.svg"></p>
+<details>
+<summary><b>Activity</b> — coding time, GitHub stats and recent work, refreshed daily</summary>
 
 ### Coding time this week
 
-Languages and total time from [WakaTime](https://wakatime.com), personal and
-company work only — project, file and branch names are never sent.
+Languages and total time from [WakaTime](https://wakatime.com). Personal and
+company work only; project, file and branch names are never sent.
 
 <!--START_SECTION:waka-->
 - Waiting for the first WakaTime refresh.
 <!--END_SECTION:waka-->
+
+### GitHub stats
+
+<img alt="GitHub metrics for martybytes: contribution calendar, activity and repositories" src="https://raw.githubusercontent.com/martybytes/MartyBytes/main/github-metrics.svg">
 
 ### Currently working on
 
@@ -86,23 +71,7 @@ company work only — project, file and branch names are never sent.
 {{ /* RECENT_STARS */ }}
 
 > [!NOTE]
-> These four lists are regenerated daily by [a workflow](.github/workflows/readme.yml)
-> from public activity only — private repositories, forks and this repository are
-> left out, and a project already under "Currently working on" is not repeated
-> under "Latest projects". Most of my client and company work is private, so this
-> is a sample rather than the whole picture.
+> Public activity only, regenerated by [a workflow](.github/workflows/readme.yml).
+> Most of my client work is private, so this is a sample rather than the whole picture.
 
-## Contact
-
-<p align="left">
-  <a href="https://github.com/martybytes"><picture><source media="(prefers-color-scheme: dark)" srcset="https://raw.githubusercontent.com/danielcranney/readme-generator/main/public/icons/socials/github-dark.svg"><img alt="GitHub" src="https://raw.githubusercontent.com/danielcranney/readme-generator/main/public/icons/socials/github.svg" width="32" height="32"></picture></a>
-  <a href="https://www.linkedin.com/in/martysampson/"><picture><source media="(prefers-color-scheme: dark)" srcset="https://raw.githubusercontent.com/danielcranney/readme-generator/main/public/icons/socials/linkedin-dark.svg"><img alt="LinkedIn" src="https://raw.githubusercontent.com/danielcranney/readme-generator/main/public/icons/socials/linkedin.svg" width="32" height="32"></picture></a>
-  <a href="https://x.com/martybytes"><picture><source media="(prefers-color-scheme: dark)" srcset="https://raw.githubusercontent.com/danielcranney/readme-generator/main/public/icons/socials/twitter-dark.svg"><img alt="X" src="https://raw.githubusercontent.com/danielcranney/readme-generator/main/public/icons/socials/twitter.svg" width="32" height="32"></picture></a>
-  <a href="https://www.youtube.com/@MartyBytes"><picture><source media="(prefers-color-scheme: dark)" srcset="https://raw.githubusercontent.com/danielcranney/readme-generator/main/public/icons/socials/youtube-dark.svg"><img alt="YouTube" src="https://raw.githubusercontent.com/danielcranney/readme-generator/main/public/icons/socials/youtube.svg" width="32" height="32"></picture></a>
-</p>
-
-- Writing: [martybytes.com](https://martybytes.com) and [martysampson.ai](https://martysampson.ai)
-- Video: [youtube.com/@MartyBytes](https://www.youtube.com/@MartyBytes)
-- Professional: [linkedin.com/in/martysampson](https://www.linkedin.com/in/martysampson/)
-- Short posts: [x.com/martybytes](https://x.com/martybytes)
-- Advisory work: [dimension42.ai](https://dimension42.ai)
+</details>

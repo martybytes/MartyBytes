@@ -68,6 +68,41 @@ class RenderTests(unittest.TestCase):
                          "a\n<!--START_SECTION:waka-->\nPython 3 hrs\n<!--END_SECTION:waka-->\nb")
         self.assertEqual(renderer.keep_sections(fresh, ""), fresh)
 
+    def test_stars_label(self):
+        cases = {0: "", 9: "", 10: "10 stars", 999: "999 stars", 1000: "1k+ stars",
+                 1234: "1.2k+ stars", 1299: "1.2k+ stars", 28470: "28.4k+ stars"}
+        for count, label in cases.items():
+            self.assertEqual(renderer.stars_label(count), label, count)
+
+    def test_featured_lines_skip_forks_and_private(self):
+        featured = [{"repo": "u/a", "blurb": "Does A"}, {"repo": "u/fork", "blurb": "x"},
+                    {"repo": "u/priv", "blurb": "x"}, {"repo": "u/gone", "blurb": "x"},
+                    {"repo": "u/big", "blurb": "Does B"}]
+        def r(name, stars=0, fork=False, private=False):
+            return {"nameWithOwner": name, "url": "https://github.com/" + name,
+                    "stargazerCount": stars, "isFork": fork, "isPrivate": private}
+        repos = {"u/a": r("u/a", 3), "u/fork": r("u/fork", fork=True),
+                 "u/priv": r("u/priv", private=True), "u/big": r("u/big", 1500)}
+        self.assertEqual(renderer.featured_lines(featured, repos), [
+            "- **[a](https://github.com/u/a)** — Does A",
+            "- **[big](https://github.com/u/big)** — Does B (1.5k+ stars)"])
+
+    def test_featured_query_quotes_names(self):
+        query = renderer.featured_query([{"repo": "u/a.b", "blurb": ""}])
+        self.assertIn('r0: repository(owner: "u", name: "a.b")', query)
+
+    def test_now_picks_the_newer_event(self):
+        pull = {"title": "Fix [it]", "html_url": "https://github.com/o/r/pull/1",
+                "repository_url": "https://api.github.com/repos/o/r", "created_at": "2026-11-02T00:00:00Z"}
+        repo = {"full_name": "u/new", "html_url": "https://github.com/u/new",
+                "description": "Thing", "created_at": "2026-11-01T00:00:00Z"}
+        self.assertEqual(renderer.now_line(pull, repo),
+                         r"**Now:** [Fix \[it\]](https://github.com/o/r/pull/1) in [o/r](https://github.com/o/r)")
+        repo["created_at"] = "2026-11-03T00:00:00Z"
+        self.assertEqual(renderer.now_line(pull, repo),
+                         "**Now:** started [u/new](https://github.com/u/new) — Thing")
+        self.assertEqual(renderer.now_line(None, None), "**Now:** nothing public this week.")
+
     def test_missing_or_duplicate_marker_fails(self):
         for template in ["", "{{ /* RECENT_REPOS */ }}" * 2]:
             with self.assertRaises(ValueError):
