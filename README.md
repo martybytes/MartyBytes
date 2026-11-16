@@ -58,7 +58,16 @@ an agent can grep.
 
 ## Activity
 
-<p align="left"><img alt="GitHub metrics for martybytes: contribution calendar, activity, repositories and coding time" src="https://raw.githubusercontent.com/martybytes/MartyBytes/main/github-metrics.svg"></p>
+<p align="left"><img alt="GitHub metrics for martybytes: contribution calendar, activity and repositories" src="https://raw.githubusercontent.com/martybytes/MartyBytes/main/github-metrics.svg"></p>
+
+### Coding time this week
+
+Languages and total time from [WakaTime](https://wakatime.com), personal and
+company work only — project, file and branch names are never sent.
+
+<!--START_SECTION:waka-->
+- Waiting for the first WakaTime refresh.
+<!--END_SECTION:waka-->
 
 ### Currently working on
 

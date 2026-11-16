@@ -35,6 +35,10 @@ query($login: String!) {
 
 MARKER = re.compile(r"\{\{ /\* (RECENT_[A-Z_]+) \*/ \}\}")
 
+# Blocks another workflow owns (waka.yml writes the WakaTime stats); a re-render
+# keeps whatever is between these markers in the current README.
+KEPT_SECTIONS = ("waka",)
+
 
 def api(arguments):
     for attempt in range(3):
@@ -102,6 +106,16 @@ def render(template, sections):
                       template)
 
 
+def keep_sections(rendered, previous):
+    for name in KEPT_SECTIONS:
+        start, end = f"<!--START_SECTION:{name}-->", f"<!--END_SECTION:{name}-->"
+        pattern = re.compile(re.escape(start) + r".*?" + re.escape(end), re.S)
+        old = pattern.search(previous)
+        if old and pattern.search(rendered):
+            rendered = pattern.sub(lambda _: old[0], rendered, count=1)
+    return rendered
+
+
 def sections(login):
     data = api(["graphql", "-f", f"query={QUERY}", "-f", f"login={login}"])
     entries = data["data"]["user"]["contributionsCollection"]["commitContributionsByRepository"]
@@ -136,4 +150,6 @@ def sections(login):
 if __name__ == "__main__":
     login = os.environ["GITHUB_REPOSITORY_OWNER"]
     template = Path(sys.argv[1]).read_text()
-    Path(sys.argv[2]).write_text(render(template, sections(login)))
+    target = Path(sys.argv[2])
+    previous = target.read_text() if target.exists() else ""
+    target.write_text(keep_sections(render(template, sections(login)), previous))

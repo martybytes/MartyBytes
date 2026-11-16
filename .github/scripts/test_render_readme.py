@@ -61,6 +61,13 @@ class RenderTests(unittest.TestCase):
         self.assertEqual(renderer.render("{{ /* RECENT_STARS */ }}", {"RECENT_STARS": []}),
                          "- Nothing yet.")
 
+    def test_waka_section_survives_rerender(self):
+        fresh = "a\n<!--START_SECTION:waka-->\nplaceholder\n<!--END_SECTION:waka-->\nb"
+        old = "x\n<!--START_SECTION:waka-->\nPython 3 hrs\n<!--END_SECTION:waka-->\ny"
+        self.assertEqual(renderer.keep_sections(fresh, old),
+                         "a\n<!--START_SECTION:waka-->\nPython 3 hrs\n<!--END_SECTION:waka-->\nb")
+        self.assertEqual(renderer.keep_sections(fresh, ""), fresh)
+
     def test_missing_or_duplicate_marker_fails(self):
         for template in ["", "{{ /* RECENT_REPOS */ }}" * 2]:
             with self.assertRaises(ValueError):

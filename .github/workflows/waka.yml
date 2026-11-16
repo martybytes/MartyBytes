@@ -1,0 +1,28 @@
+# Languages and total coding time only. Projects, editors and OS are never
+# fetched into the README. Free WakaTime plans keep 7 days of history, so the
+# range is last_7_days.
+name: waka
+on:
+  schedule: [{cron: "30 5 * * *"}]
+  workflow_dispatch:
+jobs:
+  waka-readme:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+    concurrency:
+      group: profile-update-${{ github.ref }}
+      cancel-in-progress: false
+    steps:
+      - uses: athul/waka-readme@v0.3.1
+        with:
+          # WakaTime secret API key (Settings -> Account), sent as basic auth.
+          WAKATIME_API_KEY: ${{ secrets.WAKATIME_API_KEY }}
+          SECTION_NAME: waka
+          TIME_RANGE: last_7_days
+          SHOW_TITLE: false
+          SHOW_TIME: true
+          SHOW_TOTAL: true
+          LANG_COUNT: 6
+          CODE_LANG: text
+          COMMIT_MESSAGE: 'waka: update coding stats'
