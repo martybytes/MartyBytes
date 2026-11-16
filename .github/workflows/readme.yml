@@ -26,7 +26,8 @@ jobs:
 
       - name: Generate README
         env:
-          GH_TOKEN: ${{ secrets.GH_PAT }}
+          # Public data only, so the built-in token works until GH_PAT is set.
+          GH_TOKEN: ${{ secrets.GH_PAT || github.token }}
         run: python3 .github/scripts/render-readme.py README.gtpl README.md
 
       - name: Lint README against awesome-github-readme
