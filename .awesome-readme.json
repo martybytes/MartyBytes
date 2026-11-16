@@ -1,0 +1,13 @@
+{
+  "$schema": "https://raw.githubusercontent.com/martybytes/awesome-github-readme/main/schema/awesome-readme.schema.json",
+  "profile": "minimal",
+  "strict": false,
+  "min_score": 90,
+  "disable": [
+    "ONB001", "ONB002", "ONB003", "ONB004",
+    "SEC001", "TRU001", "TRU002", "TRU003", "ORI002"
+  ],
+  "require": [],
+  "allow_badges": [],
+  "session_summary": false
+}

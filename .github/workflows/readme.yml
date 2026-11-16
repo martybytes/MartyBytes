@@ -1,0 +1,43 @@
+name: readme
+on:
+  push:
+    branches: [main]
+    paths-ignore: [github-metrics.svg]
+  workflow_dispatch:
+  schedule:
+    - cron: '0 6 * * *'
+jobs:
+  render:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+    concurrency:
+      group: profile-update-${{ github.ref }}
+      cancel-in-progress: false
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v7.0.1
+        with:
+          # Read the branch tip after waiting for the metrics job.
+          ref: ${{ github.ref_name }}
+
+      - name: Test README renderer
+        run: python3 -m unittest discover -s .github/scripts -p 'test_*.py'
+
+      - name: Generate README
+        env:
+          GH_TOKEN: ${{ secrets.GH_PAT }}
+        run: python3 .github/scripts/render-readme.py README.gtpl README.md
+
+      - name: Lint README against awesome-github-readme
+        run: |
+          curl --fail --location --silent --show-error --retry 3 \
+            https://raw.githubusercontent.com/martybytes/awesome-github-readme/main/scripts/readme_lint.py \
+            --output "$RUNNER_TEMP/readme_lint.py"
+          python3 "$RUNNER_TEMP/readme_lint.py" README.md
+
+      - name: Commit README
+        uses: stefanzweifel/git-auto-commit-action@v7.2.0
+        with:
+          commit_message: 'readme: refresh activity sections'
+          file_pattern: README.md

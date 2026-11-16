@@ -1,0 +1,15 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="300" viewBox="0 0 1200 300" role="img" aria-labelledby="t d">
+  <title id="t">Marty Sampson · MartyBytes</title>
+  <desc id="d">The approved Marty M beside the wordmark MARTY SAMPSON and the line MARTYBYTES, building software with agents.</desc>
+  <rect width="1200" height="300" fill="#0B0B0C"/>
+  <g stroke="#1F2022" stroke-width="1">
+    <line x1="0" y1="40" x2="1200" y2="40"/><line x1="0" y1="260" x2="1200" y2="260"/>
+    <line x1="300" y1="0" x2="300" y2="300"/>
+  </g>
+  <g transform="translate(70 60) scale(0.18)">
+    <path fill="#F4F4F2" d="M 140 900 L 100 860 L 100 140 L 140 100 L 260 100 L 500 400 L 740 100 L 860 100 L 900 140 L 900 860 L 860 900 L 740 900 L 700 860 L 700 430 L 500 680 L 300 430 L 300 860 L 260 900 Z"/>
+  </g>
+  <text x="350" y="140" fill="#F4F4F2" font-family="Archivo, 'Helvetica Neue', Helvetica, Arial, sans-serif" font-size="64" font-weight="700" letter-spacing="10">MARTY SAMPSON</text>
+  <text x="352" y="196" font-family="'IBM Plex Mono', SFMono-Regular, Menlo, Consolas, monospace" font-size="22" letter-spacing="2"><tspan fill="#F4F4F2" font-weight="600">MARTY</tspan><tspan fill="#6C4CF1" font-weight="600">BYTES</tspan><tspan fill="#8A8D8F"> · building software with agents</tspan></text>
+  <rect x="350" y="222" width="48" height="4" fill="#6C4CF1"/>
+</svg>
