@@ -10,9 +10,8 @@ jobs:
     runs-on: ubuntu-latest
     permissions:
       contents: write
-    concurrency:
-      group: profile-update-${{ github.ref }}
-      cancel-in-progress: false
+    # No shared concurrency group: this action commits through the API, and a
+    # shared group cancels whichever profile job is left waiting.
     steps:
       - uses: athul/waka-readme@v0.3.1
         with:
