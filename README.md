@@ -19,7 +19,7 @@ degree, which explains the habit of measuring things.
 
 [martybytes.com](https://martybytes.com) · [martysampson.ai](https://martysampson.ai) · [YouTube](https://www.youtube.com/@MartyBytes) · [X](https://x.com/martybytes) · [LinkedIn](https://www.linkedin.com/in/martysampson/) · [CV](https://martysampson.com/cv/)
 
-**Now:** [fix(claude): own our hook entries in settings.json, not the whole hooks key](https://github.com/martybytes/terminal-stack/pull/68) in [martybytes/terminal-stack](https://github.com/martybytes/terminal-stack)
+**Now:** [fix(ssh): ~/.ssh keys other users can open; quiet fnm over ssh; Windows gate fixes](https://github.com/martybytes/terminal-stack/pull/76) in [martybytes/terminal-stack](https://github.com/martybytes/terminal-stack)
 
 ---
 
@@ -73,9 +73,9 @@ company work only; project, file and branch names are never sent.
 
 ### Recent pull requests
 
-- [fix(claude): own our hook entries in settings.json, not the whole hooks key](https://github.com/martybytes/terminal-stack/pull/68) on [martybytes/terminal-stack](https://github.com/martybytes/terminal-stack)
-- [feat(prompt): collapse finished prompts to \`❯ cmd\`, with no blank line](https://github.com/martybytes/terminal-stack/pull/67) on [martybytes/terminal-stack](https://github.com/martybytes/terminal-stack)
-- [fix(install): the workspace question only saves a real directory](https://github.com/martybytes/terminal-stack/pull/66) on [martybytes/terminal-stack](https://github.com/martybytes/terminal-stack)
+- [fix(ssh): ~/.ssh keys other users can open; quiet fnm over ssh; Windows gate fixes](https://github.com/martybytes/terminal-stack/pull/76) on [martybytes/terminal-stack](https://github.com/martybytes/terminal-stack)
+- [fix(ssh): first real run - Port is additive, Windows before WSL, proofs check the side, readable result](https://github.com/martybytes/terminal-stack/pull/75) on [martybytes/terminal-stack](https://github.com/martybytes/terminal-stack)
+- [feat(ssh): tstack ssh - reach this PC over SSH, PowerShell on 22 and Ubuntu on 2222](https://github.com/martybytes/terminal-stack/pull/74) on [martybytes/terminal-stack](https://github.com/martybytes/terminal-stack)
 
 ### Recently starred
 
