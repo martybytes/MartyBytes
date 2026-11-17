@@ -52,7 +52,13 @@ Languages and total time from [WakaTime](https://wakatime.com). Personal and
 company work only; project, file and branch names are never sent.
 
 <!--START_SECTION:waka-->
-- Waiting for the first WakaTime refresh.
+
+```text
+Total Time: 0 secs
+
+No activity tracked
+```
+
 <!--END_SECTION:waka-->
 
 ### GitHub stats
